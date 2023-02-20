@@ -3,6 +3,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 import {Response} from "express";
+import {hashPwd} from "../utils/hashPwd";
 
 @Injectable()
 export class UsersService {
@@ -23,7 +24,7 @@ export class UsersService {
 
     createUser.username = createUserDto.username;
     createUser.email = createUserDto.email;
-    createUser.password = createUserDto.password; // Will added hash password.
+    createUser.password = hashPwd(createUserDto.password); // Will added hash password.
 
     await createUser.save()
 
