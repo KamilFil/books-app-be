@@ -31,19 +31,36 @@ export class UsersService {
 
   }
 
-  getAll() {
-    return `This action returns all users`;
+  async getAll() {
+    return await User.find()
   }
 
-  getOne(id: number) {
-    return `This action returns a #${id} user`;
+  async getOne(id: string) {
+    return await User.findOneBy({id:id});
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  async update(id: string, updateUserDto: UpdateUserDto) {
+    const checkId = await User.findOneBy({id: id})
+
+    if (!checkId) {
+      throw new BadRequestException('User with given id not exist')
+    }
+
+    await User.update(id, updateUserDto)
+
+    return `User ${updateUserDto.username} update`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+ async remove(id: string) {
+    const checkId = await User.findOneBy({id: id})
+
+    if (!checkId) {
+      throw new BadRequestException('User with given id not exist')
+    }
+
+    await User.delete(id)
+
+   return `Users ${checkId.username} delete`;
+
   }
 }
