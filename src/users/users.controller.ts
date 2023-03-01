@@ -26,7 +26,6 @@ export class UsersController {
   create(@Body() createUserDto: CreateUserDto, @Res() res: Response) {
     return this.usersService.create(createUserDto, res);
   }
-
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.Admin)
   @Get()
@@ -34,16 +33,21 @@ export class UsersController {
     return this.usersService.getAll();
   }
 
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.Admin)
   @Get(':id')
   getOne(@Param('id') id: string) {
     return this.usersService.getOne(id);
   }
-
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.User)
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.usersService.update(id, updateUserDto);
   }
 
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.Admin)
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.usersService.remove(id);

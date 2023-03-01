@@ -11,7 +11,7 @@ import { sign } from 'jsonwebtoken';
 export class AuthService {
   private async createToken(loginTokenId: string): Promise<{
     accessToken: string;
-    expiresIn: number;
+    expiresIn: string | number;
   }> {
     const payload: JwtPayload = { jwtToken: loginTokenId };
     const expiresIn = 60 * 60;
@@ -67,7 +67,23 @@ export class AuthService {
         })
         .json({ loginSuccess: true });
     } catch (e) {
-      return res.json({ error: e.message() });
+      return res.json({ error: e.message });
+    }
+  }
+
+  async logout(user: User, res: Response) {
+    try {
+      user.logginTokenId = null;
+      await user.save();
+
+      res.clearCookie('jwtToken', {
+        secure: false,
+        domain: 'localhost',
+        httpOnly: false,
+      });
+      return res.json({ logoutSucces: true });
+    } catch (e) {
+      return res.json({ error: e.message });
     }
   }
 }
