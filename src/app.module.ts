@@ -5,9 +5,15 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { DbConfig } from './config/database.config';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
+import { SendMailModule } from './send-mail/send-mail.module';
 
 @Module({
-  imports: [TypeOrmModule.forRoot(DbConfig), UsersModule, AuthModule],
+  imports: [
+    TypeOrmModule.forRoot(DbConfig),
+    UsersModule,
+    AuthModule,
+    SendMailModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
