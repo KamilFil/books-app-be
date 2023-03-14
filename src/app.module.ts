@@ -8,7 +8,7 @@ import { AuthModule } from './auth/auth.module';
 import { SendMailModule } from './send-mail/send-mail.module';
 
 import { SendFileModule } from './send-file/send-file.module';
-
+import { BooksModule } from './books/books.module';
 
 @Module({
   imports: [
@@ -17,6 +17,7 @@ import { SendFileModule } from './send-file/send-file.module';
     AuthModule,
     SendMailModule,
     SendFileModule,
+    BooksModule,
   ],
   controllers: [AppController],
   providers: [AppService],
