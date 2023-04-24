@@ -11,7 +11,7 @@ export class Book extends BaseEntity {
   author: string[];
 
   @Column({ type: 'simple-array', default: null })
-  img: string[];
+  img: string;
 
   @Column()
   description: string;

@@ -9,6 +9,8 @@ import { SendMailModule } from './send-mail/send-mail.module';
 
 import { SendFileModule } from './send-file/send-file.module';
 import { BooksModule } from './books/books.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 @Module({
   imports: [
@@ -18,6 +20,10 @@ import { BooksModule } from './books/books.module';
     SendMailModule,
     SendFileModule,
     BooksModule,
+    ServeStaticModule.forRoot({
+      serveRoot: '/uploads',
+      rootPath: join(__dirname, '..', 'uploads'),
+    }),
   ],
   controllers: [AppController],
   providers: [AppService],
