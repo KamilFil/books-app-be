@@ -65,9 +65,21 @@ export class AuthService {
           domain: 'localhost',
           httpOnly: true,
         })
-        .json({ loginSuccess: true });
+        .json({ loginSuccess: true, token: token.accessToken });
     } catch (e) {
       return res.json({ error: e.message });
+    }
+  }
+
+  async user(user: User, res: Response) {
+    try {
+      const userRes = await User.findOneBy({ username: user.username });
+      if (!userRes) {
+        return res.json({ isSuccess: false });
+      }
+      return res.json(userRes);
+    } catch (e) {
+      return res.json(e.message);
     }
   }
 

@@ -14,6 +14,11 @@ export class AuthController {
   async login(@Body() req: LoginUserDto, @Res() res: Response): Promise<any> {
     return this.authService.login(req, res);
   }
+  @UseGuards(JwtAuthGuard)
+  @Get('user')
+  async user(@UserObj() user: User, @Res() res: Response) {
+    return this.authService.user(user, res);
+  }
 
   @UseGuards(JwtAuthGuard)
   @Get('logout')
