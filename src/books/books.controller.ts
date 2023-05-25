@@ -21,6 +21,16 @@ export class BooksController {
     return this.booksService.create(createBookDto);
   }
 
+  @Get('active/:id')
+  active(@Param('id', ParseUUIDPipe) id: string) {
+    return this.booksService.active(id);
+  }
+
+  @Get('like/:id')
+  likeSystem(@Param('id', ParseUUIDPipe) id: string) {
+    return this.booksService.likeBook(id);
+  }
+
   @Get()
   findAll() {
     return this.booksService.findAll();

@@ -13,6 +13,12 @@ export class Book extends BaseEntity {
   @Column({ type: 'simple-array', default: null })
   img: string;
 
+  @Column({ default: 0 })
+  likeQuantity: number;
+
   @Column()
   description: string;
+
+  @Column({ default: false })
+  active: boolean;
 }

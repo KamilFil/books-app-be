@@ -25,8 +25,31 @@ export class BooksService {
     return `${book.name}`;
   }
 
+  async likeBook(id: string) {
+    const findBook = await Book.findOneBy({ id: id });
+    if (!findBook) {
+      throw new BadRequestException("Book's not exist");
+    }
+
+    findBook.likeQuantity = findBook.likeQuantity + 1;
+
+    await Book.save(findBook);
+    return findBook.likeQuantity;
+  }
+
+  async active(id: string) {
+    const findBook = await Book.findOneBy({ id: id });
+    if (!findBook) {
+      throw new BadRequestException("Book's not exist");
+    }
+
+    findBook.active = !findBook.active;
+    await Book.save(findBook);
+    return findBook.active;
+  }
+
   async findAll() {
-    return await Book.find();
+    return await Book.find({ where: { active: true } });
   }
 
   async findOne(id: string) {
