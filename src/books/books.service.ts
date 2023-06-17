@@ -49,11 +49,19 @@ export class BooksService {
   }
 
   async findAll() {
+    return await Book.find();
+  }
+
+  async findAllActive() {
     return await Book.find({ where: { active: true } });
   }
 
   async findOne(id: string) {
-    return await Book.findOneBy({ id: id });
+    const findBook = await Book.findOneBy({ id: id, active: true });
+    if (!findBook) {
+      throw new BadRequestException("Book's not exist");
+    }
+    return findBook;
   }
 
   async update(id: string, updateBookDto: UpdateBookDto) {

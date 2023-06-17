@@ -26,6 +26,11 @@ export class BooksController {
     return this.booksService.active(id);
   }
 
+  @Get('active')
+  findAllActive() {
+    return this.booksService.findAllActive();
+  }
+
   @Get('like/:id')
   likeSystem(@Param('id', ParseUUIDPipe) id: string) {
     return this.booksService.likeBook(id);
