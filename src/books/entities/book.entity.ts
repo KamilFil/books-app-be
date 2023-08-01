@@ -1,4 +1,11 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { CategoryBook } from '../../category-books/entities/category-book.entity';
 @Entity()
 export class Book extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
@@ -12,6 +19,9 @@ export class Book extends BaseEntity {
 
   @Column({ type: 'simple-array', default: null })
   img: string;
+
+  @ManyToOne(() => CategoryBook, (categories) => CategoryBook.name)
+  categories: CategoryBook;
 
   @Column({ default: 0 })
   likeQuantity: number;

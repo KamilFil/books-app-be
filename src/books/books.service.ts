@@ -19,6 +19,7 @@ export class BooksService {
     book.author = createBookDto.author;
     book.img = createBookDto.img;
     book.description = createBookDto.description;
+    book.categories = createBookDto.categories;
 
     await book.save();
 
@@ -49,7 +50,11 @@ export class BooksService {
   }
 
   async findAll() {
-    return await Book.find();
+    return await Book.find({
+      relations: {
+        categories: true,
+      },
+    });
   }
 
   async findAllActive() {
