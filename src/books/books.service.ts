@@ -62,11 +62,31 @@ export class BooksService {
   }
 
   async findOne(id: string) {
-    const findBook = await Book.findOneBy({ id: id, active: true });
+    const findBook = await Book.findOne({
+      relations: { categories: true },
+      where: { id: id, active: true },
+    });
     if (!findBook) {
       throw new BadRequestException("Book's not exist");
     }
     return findBook;
+  }
+
+  async findBookCat(categoryName: string) {
+    const findBookCat = await Book.createQueryBuilder('book')
+      .innerJoin('book.categories', 'category')
+      .where(`book.active = true`)
+      .andWhere('category.name = :categoryName', {
+        categoryName,
+      })
+
+      .getMany();
+
+    if (findBookCat.length === 0) {
+      throw new BadRequestException('Category not exist');
+    }
+
+    return findBookCat;
   }
 
   async update(id: string, updateBookDto: UpdateBookDto) {

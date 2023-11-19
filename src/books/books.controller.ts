@@ -41,6 +41,11 @@ export class BooksController {
     return this.booksService.findAll();
   }
 
+  @Get('category/:categoryName')
+  findBookCat(@Param('categoryName') categoryName: string) {
+    return this.booksService.findBookCat(categoryName);
+  }
+
   @Get(':id')
   findOne(@Param('id', ParseUUIDPipe) id: string) {
     return this.booksService.findOne(id);

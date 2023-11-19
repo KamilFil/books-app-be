@@ -20,7 +20,7 @@ export class Book extends BaseEntity {
   @Column({ type: 'simple-array', default: null })
   img: string;
 
-  @ManyToOne(() => CategoryBook, (categories) => CategoryBook.name)
+  @ManyToOne(() => CategoryBook, (category) => category.books)
   categories: CategoryBook;
 
   @Column({ default: 0 })

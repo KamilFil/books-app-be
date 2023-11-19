@@ -11,9 +11,11 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { CategoryBooksModule } from './category-books/category-books.module';
 import 'dotenv/config';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({ envFilePath: '.env', isGlobal: true }),
     TypeOrmModule.forRoot(DbConfig),
     UsersModule,
     AuthModule,

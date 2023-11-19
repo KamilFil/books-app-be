@@ -8,6 +8,7 @@ import {
 import { Book } from '../../books/entities/book.entity';
 @Entity()
 export class CategoryBook extends BaseEntity {
+
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -17,6 +18,6 @@ export class CategoryBook extends BaseEntity {
   @Column()
   description: string;
 
-  @OneToMany(() => Book, (categories) => Book.name)
-  categories: Book;
+  @OneToMany(() => Book, (book) => book.categories)
+  books: Book[];
 }
