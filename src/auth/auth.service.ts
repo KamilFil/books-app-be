@@ -49,7 +49,7 @@ export class AuthService {
       const user = await User.findOne({
         where: {
           username: req.username,
-          password: hashPwd(req.password),
+          password: req.password,
         },
       });
 

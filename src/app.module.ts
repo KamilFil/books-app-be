@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -10,7 +11,6 @@ import { BooksModule } from './books/books.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { CategoryBooksModule } from './category-books/category-books.module';
-import 'dotenv/config';
 import { ConfigModule } from '@nestjs/config';
 
 @Module({

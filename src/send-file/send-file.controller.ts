@@ -11,7 +11,10 @@ import { multerConfig } from '../config/multer.config';
 export class SendFileController {
   @Post('upload')
   @UseInterceptors(FileInterceptor('file', multerConfig))
-  async addFile(@UploadedFile() file: Express.Multer.File) {
+  create(
+    @UploadedFile() file: Express.Multer.File
+  ) {
     return `File ${file.originalname} update`;
+
   }
 }

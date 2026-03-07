@@ -50,6 +50,10 @@ export class BooksController {
   findOne(@Param('id', ParseUUIDPipe) id: string) {
     return this.booksService.findOne(id);
   }
+  @Get('admin/:id')
+  findOneForAdmin(@Param('id', ParseUUIDPipe) id: string) {
+    return this.booksService.findOneForAdmin(id);
+  }
 
   @Patch(':id')
   update(

@@ -5,12 +5,13 @@ import { CategoryBook } from '../category-books/entities/category-book.entity';
 
 export const DbConfig = {
   type: 'mysql',
-  host: 'localhost',
-  port: 3306,
-  username: process.env.DB_USER || 'root',
-  password: process.env.DB_PASS || '',
-  database: process.env.DB_NAME || 'books_db',
+  host: process.env.DB_HOST ?? 'localhost',
+  port: process.env.DB_PORT ? Number(process.env.DB_PORT) : 3306,
+  username: process.env.DB_USERNAME ?? 'root',
+  password: process.env.DB_PASSWORD ?? '',
+  database: process.env.DB_NAME ?? 'books_db',
   entities: [User, Book, CategoryBook],
   bigNumberStrings: false,
-  synchronize: true,
+  logging: false,
+  synchronize: process.env.DB_SYNCHRONIZE === 'true',
 } as DataSourceOptions;
